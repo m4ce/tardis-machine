@@ -13,7 +13,7 @@ if [ $disk_used_pct -gt $DISK_SIZE_THRESHOLD_PCT ]; then
 fi
 
 load_avg1=`cat /proc/loadavg | cut -d' ' -f 1`
-if [ $load_avg -gt $AVAILABLE_CPUS ]; then
+if (($(echo "${load_avg1} > ${AVAILABLE_CPUS}" | bc -l))); then
   exit 1
 fi
 

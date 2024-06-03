@@ -1,7 +1,7 @@
 from node:18-slim
 # version arg contains current git tag
 # install git
-RUN apt-get update && apt-get install -y git curl
+RUN apt-get update && apt-get install -y git curl bc
 # install it
 COPY tsconfig.json /tmp/npm/
 COPY package.json /tmp/npm/
