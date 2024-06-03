@@ -3,7 +3,11 @@ from node:18-slim
 # install git
 RUN apt-get update && apt-get install -y git curl
 # install it
-COPY . /tmp/npm/
+COPY tsconfig.json /tmp/npm/
+COPY package.json /tmp/npm/
+COPY bin /tmp/npm/bin
+COPY src /tmp/npm/src
+COPY test /tmp/npm/test
 RUN cd /tmp/npm && npm install && npm install --global
 # run it
 ADD readiness.sh /
