@@ -38,6 +38,11 @@ const argv = yargs
     describe: 'Run tardis-machine as cluster of Node.js processes',
     default: false
   })
+  .option('max-cpus', {
+    type: 'number',
+    describe: 'Maximum number of processes to spawn in cluster mode',
+    default: numCPUs
+  })
 
   .option('debug', {
     type: 'boolean',
@@ -76,7 +81,7 @@ async function start() {
 
     suffix = '(cluster mode)'
     if (cluster.isMaster) {
-      for (let i = 0; i < numCPUs; i++) {
+      for (let i = 0; i < argv['max-cpus']; i++) {
         cluster.fork()
       }
     } else {
